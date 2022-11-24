@@ -4,7 +4,6 @@ def input_students
   puts "Please enter the name of the students"
   puts "To finish, just hit return twice"
   #create an empty array
-  #students = [] - I don't think I need this
   #get the first name
   name = gets.chomp
   #while the name is not empty, repeat this code
@@ -17,6 +16,18 @@ def input_students
   end
 end
 
+def save_students
+  # open file for writing
+  file = File.open("students.csv", "w")
+  # iterate over the array of students
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
+end 
+
 def interactive_menu
   loop do
     print_menu
@@ -27,6 +38,7 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit" 
 end
 
@@ -42,6 +54,8 @@ def process(selection)
     input_students
   when "2"
     show_students
+  when "3"
+    save_students
   when "9"
     exit
   else

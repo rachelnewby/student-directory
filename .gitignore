@@ -1,0 +1,5 @@
+# Ignore students.csv file
+*.csv
+
+# Ignore Mac system files
+.DS_Store
